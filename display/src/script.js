@@ -13,12 +13,22 @@ const box1 = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicM
 scene.add(box1);
 
 // create the camera
-const cameraSize = {
-    width: 800,
-    height: 800
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight
 };
 
-const camera = new THREE.PerspectiveCamera(75, cameraSize.width / cameraSize.height);
+window.addEventListener('resize', () => {
+    sizes.height = window.innerHeight;
+    sizes.width = window.innerWidth
+
+    camera.aspect = sizes.width / sizes.height;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(sizes.width, sizes.height);
+})
+
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
 camera.position.z = 10;
 scene.add(camera);
 
@@ -30,7 +40,7 @@ const renderer = new THREE.WebGLRenderer({
     canvas
 });
 
-renderer.setSize(cameraSize.width, cameraSize.height);
+renderer.setSize(sizes.width, sizes.height);
 
 scene.background = new THREE.Color( 0xe4e6eb );
 
