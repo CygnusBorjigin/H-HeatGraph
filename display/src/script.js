@@ -1,7 +1,10 @@
 import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import coordinates_data from '../../centers_normalized.json';
 
+
+console.log(coordinates_data);
 // obtain the canvas
 const canvas = document.getElementById("canvas");
 
