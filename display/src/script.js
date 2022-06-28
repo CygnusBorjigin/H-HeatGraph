@@ -3,8 +3,6 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import coordinates_data from '../../centers_normalized.json';
 
-
-console.log(coordinates_data);
 // obtain the canvas
 const canvas = document.getElementById("canvas");
 
@@ -12,8 +10,15 @@ const canvas = document.getElementById("canvas");
 const scene = new THREE.Scene();
 
 // create the object
-const box1 = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: "blue"}));
-scene.add(box1);
+Object.keys(coordinates_data).forEach(each_station => {
+    const column = new THREE.Mesh(new THREE.BoxGeometry(5, 5, 1), new THREE.MeshBasicMaterial({color: "blue"}));
+    const x_position = coordinates_data[each_station][0] * 100;
+    const y_position = coordinates_data[each_station][1] * 100;
+    column.position.set(x_position, y_position, 0);
+    scene.add(column);
+})
+// const box1 = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: "blue"}));
+// scene.add(box1);
 
 // create the camera
 const sizes = {
